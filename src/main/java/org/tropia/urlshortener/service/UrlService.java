@@ -10,6 +10,7 @@ import org.tropia.urlshortener.repository.UrlRepository;
 import org.tropia.urlshortener.util.mapper.UrlCreateMapper;
 import org.tropia.urlshortener.util.mapper.UrlReadMapper;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Service
@@ -23,6 +24,7 @@ public class UrlService {
     public UrlReadDto save(UrlCreateDto dto) {
         Url url = urlCreateMapper.map(dto);
         url.setShortUrl(generateShortUrl());
+        url.setCreatedAt(Instant.now());
         urlRepository.save(url);
         return urlReadMapper.map(url);
     }
@@ -33,7 +35,7 @@ public class UrlService {
     }
 
 
-    public String generateShortUrl() {
+    private String generateShortUrl() {
         return UUID.randomUUID().toString().substring(0, 9);
     }
 }

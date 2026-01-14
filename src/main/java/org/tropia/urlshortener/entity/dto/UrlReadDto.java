@@ -18,5 +18,6 @@ import java.time.Instant;
 public class UrlReadDto {
     private Long id;
     private String shortUrl;
+    private String originalUrl;
     private Instant createdAt;
 }

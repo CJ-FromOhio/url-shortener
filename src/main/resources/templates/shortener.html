@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Link</title>
+    <style>
+        /* Используем те же стили для body и container, что и выше */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #60544D;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #AAA396;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+        }
+        .result-box {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            word-break: break-all;
+            margin: 1.5rem 0;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .back-link {
+            text-decoration: none;
+            color: #5A493B;
+            font-size: 0.9rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Готово! 🎉</h1>
+    <p>Ваша короткая ссылка:</p>
+    <div class="result-box">
+        <span th:text="${url}">localhost:8080/abc123</span>
+    </div>
+    <a href="/" class="back-link">← Создать еще одну</a> <br>
+    <a href="https://t.me/tropiabio" class="back-link">creator tgc</a>
+</div>
+</body>
+</html>

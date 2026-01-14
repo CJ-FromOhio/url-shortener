@@ -24,9 +24,4 @@ public class Url {
     private String originalUrl;
 
     private Instant createdAt;
-
-    @PostConstruct
-    public void init() {
-        this.createdAt = Instant.now();
-    }
 }

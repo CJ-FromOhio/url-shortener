@@ -16,7 +16,5 @@ import java.time.Instant;
 @AllArgsConstructor
 @Builder
 public class UrlCreateDto {
-    private Long id;
     private String originalUrl;
-    private Instant createdAt;
 }
