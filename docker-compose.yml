@@ -1,0 +1,30 @@
+services:
+  database:
+    restart: always
+    container_name: postgres
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: url_shortener
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pg_volume:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  app:
+    restart: always
+    container_name: application
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    environment:
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_URL: ${DB_URL}
+
+volumes:
+  pg_volume:
+    driver: local
