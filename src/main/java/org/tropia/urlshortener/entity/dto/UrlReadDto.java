@@ -9,13 +9,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UrlReadDto {
+public class UrlReadDto implements Serializable {
     private Long id;
     private String shortUrl;
     private String originalUrl;

@@ -1,8 +1,12 @@
 package org.tropia.urlshortener.service;
 
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 import org.tropia.urlshortener.entity.Url;
 import org.tropia.urlshortener.entity.dto.UrlCreateDto;
 import org.tropia.urlshortener.entity.dto.UrlReadDto;
@@ -28,12 +32,13 @@ public class UrlService {
         urlRepository.save(url);
         return urlReadMapper.map(url);
     }
-    @Transactional
+
+    @Transactional(readOnly = true)
+    @Cacheable(value = "url", key = "#shortUrl")
     public UrlReadDto getByShortUrl(String shortUrl) {
         return urlReadMapper.map(urlRepository.findByShortUrl(shortUrl)
-                .orElse(null));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "URL not found")));
     }
-
 
     private String generateShortUrl() {
         return UUID.randomUUID().toString().substring(0, 9);
